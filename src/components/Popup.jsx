@@ -10,7 +10,7 @@ import { storage } from '../utils/storage.js';
 import { timer } from '../utils/timer.js';
 import gsap from 'gsap';
 
-// --- Inline Professional Icons ---
+
 const Icons = {
   Target: () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -99,7 +99,7 @@ const Popup = () => {
   const [streak, setStreak] = useState(0);
   const [todayBlocked, setTodayBlocked] = useState(0);
 
-  // Animation refs
+
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
   const timerRef = useRef(null);
@@ -109,7 +109,7 @@ const Popup = () => {
     calculateStreak();
     const interval = setInterval(updateTimer, 1000);
     
-    // Entrance animation
+  
     if (containerRef.current) {
       gsap.fromTo(
         cardsRef.current,
@@ -151,7 +151,7 @@ const Popup = () => {
       setProgress(prog);
       
       if (remaining === 0) {
-        // Animate timer completion
+       
         if (timerRef.current) {
           gsap.to(timerRef.current, {
             scale: 1.1,
@@ -170,14 +170,13 @@ const Popup = () => {
     const data = await storage.getSettings();
     const lastReset = data.stats.lastReset;
     const daysSinceReset = Math.floor((Date.now() - lastReset) / (1000 * 60 * 60 * 24));
-    setStreak(Math.min(daysSinceReset, 99)); // Cap at 99 for display
+    setStreak(Math.min(daysSinceReset, 99)); 
   };
 
   const toggleFocusMode = async () => {
     const newState = !settings.enabled;
     await storage.set({ enabled: newState });
     
-    // Animate toggle
     gsap.to(cardsRef.current[0], {
       scale: 0.98,
       duration: 0.1,
@@ -191,7 +190,7 @@ const Popup = () => {
   const startPomodoro = async () => {
     await timer.startPomodoro(settings);
     
-    // Animate start
+
     if (timerRef.current) {
       gsap.fromTo(timerRef.current, 
         { scale: 0.8, opacity: 0 },
@@ -205,7 +204,7 @@ const Popup = () => {
   const stopPomodoro = async () => {
     await timer.stopPomodoro();
     
-    // Animate stop
+  
     if (timerRef.current) {
       gsap.to(timerRef.current, {
         scale: 0.8,
@@ -858,7 +857,7 @@ const styles = {
   }
 };
 
-// Add CSS animation for spinner
+
 const styleSheet = document.createElement("style");
 styleSheet.textContent = `
   @keyframes spin {

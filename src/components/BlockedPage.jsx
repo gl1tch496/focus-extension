@@ -53,7 +53,7 @@ const BlockedPage = () => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
     setTip(motivationalTips[Math.floor(Math.random() * motivationalTips.length)]);
     
-    // Update stats
+
     updateBlockStats();
   }, []);
 
@@ -82,7 +82,7 @@ const BlockedPage = () => {
         const data = JSON.parse(response.value);
         const today = new Date().toDateString();
         
-        // Reset daily count if new day
+    
         if (data.stats.lastBlockDate !== today) {
           data.stats.blockedToday = 0;
           data.stats.lastBlockDate = today;
@@ -470,7 +470,7 @@ const BlockedPage = () => {
   );
 };
 
-// Refined purple-themed styles
+
 const styles = {
   container: {
     minHeight: '100vh',

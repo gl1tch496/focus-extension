@@ -1,4 +1,4 @@
-// Pomodoro timer logic with session tracking
+
 export const timer = {
   async startPomodoro(settings) {
     const duration = settings.pomodoro.currentSession === 'work' 
@@ -16,12 +16,12 @@ export const timer = {
       }
     });
 
-    // Set alarm
+
     chrome.alarms.create('pomodoroEnd', {
       when: endTime
     });
 
-    // Track session start
+ 
     this.trackSession('start', settings.pomodoro.currentSession);
   },
 
@@ -38,14 +38,14 @@ export const timer = {
       }
     });
 
-    // Track session stop
+   
     this.trackSession('stop', settings.pomodoro.currentSession);
   },
 
   async switchSession(settings) {
     const newSession = settings.pomodoro.currentSession === 'work' ? 'break' : 'work';
     
-    // Increment completed sessions
+  
     const completedSessions = (settings.pomodoro.completedSessions || 0) + 1;
     
     await chrome.storage.sync.set({
@@ -57,10 +57,10 @@ export const timer = {
       }
     });
 
-    // Track session completion
+
     this.trackSession('complete', settings.pomodoro.currentSession);
 
-    // Send notification
+
     if (chrome.notifications) {
       chrome.notifications.create({
         type: 'basic',
@@ -92,7 +92,7 @@ export const timer = {
     return Math.min(100, Math.floor((elapsed / total) * 100));
   },
 
-  // Track sessions for analytics
+  
   async trackSession(action, sessionType) {
     const today = new Date().toISOString().split('T')[0];
     const data = await chrome.storage.local.get('sessionHistory') || {};
@@ -109,7 +109,7 @@ export const timer = {
     await chrome.storage.local.set({ sessionHistory: history });
   },
 
-  // Get session statistics
+
   async getSessionStats(days = 7) {
     const data = await chrome.storage.local.get('sessionHistory') || {};
     const history = data.sessionHistory || {};

@@ -1,4 +1,4 @@
-// Motivational quotes
+
 const quotes = [
   { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
   { text: "Focus is a matter of deciding what things you're not going to do.", author: "John Carmack" },
@@ -10,14 +10,14 @@ const quotes = [
   { text: "The shorter way to do many things is to only do one thing at a time.", author: "Mozart" },
 ];
 
-// Display random quote
+
 function displayQuote() {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
   document.querySelector('.quote-text').textContent = `"${quote.text}"`;
   document.querySelector('.quote-author').textContent = `— ${quote.author}`;
 }
 
-// Display blocked URL
+
 function displayBlockedUrl() {
   const url = window.location.href;
   const params = new URLSearchParams(window.location.search);
@@ -25,7 +25,7 @@ function displayBlockedUrl() {
   document.getElementById('current-url').textContent = blockedUrl;
 }
 
-// Update timer
+
 function updateTimer() {
   chrome.storage.local.get(['sessionEndTime'], (result) => {
     if (result.sessionEndTime) {
@@ -47,14 +47,14 @@ function updateTimer() {
   });
 }
 
-// End session button
+
 document.getElementById('end-session').addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'endSession' }, () => {
     window.location.reload();
   });
 });
 
-// Initialize
+
 displayQuote();
 displayBlockedUrl();
 updateTimer();

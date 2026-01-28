@@ -3,7 +3,7 @@ import { storage } from '../utils/storage.js';
 import gsap from 'gsap';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// --- Professional Inline Icons ---
+
 const Icons = {
   Block: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>,
   Check: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>,
@@ -28,9 +28,9 @@ const Options = () => {
   const [newYoutubeChannel, setNewYoutubeChannel] = useState('');
   const [newSubreddit, setNewSubreddit] = useState('');
   const [saveStatus, setSaveStatus] = useState('idle');
-  const [analyticsView, setAnalyticsView] = useState('overview'); // overview, detailed, trends
+  const [analyticsView, setAnalyticsView] = useState('overview'); 
 
-  // GSAP Refs
+
   const headerRef = useRef(null);
   const containerRef = useRef(null);
   const sectionsRef = useRef([]);
@@ -40,7 +40,7 @@ const Options = () => {
     loadSettings();
   }, []);
 
-  // GSAP Entrance Animation
+
   useEffect(() => {
     if (settings && sectionsRef.current.length > 0) {
       gsap.fromTo(headerRef.current, 
@@ -70,7 +70,7 @@ const Options = () => {
 
   const loadSettings = async () => {
     const data = await storage.getSettings();
-    // Add analytics history if not exists
+  
     if (!data.analyticsHistory) {
       data.analyticsHistory = generateMockHistoricalData();
     }
@@ -170,7 +170,7 @@ const Options = () => {
 
   if (!settings) return <div style={styles.loading}>Initializing Focus Engine...</div>;
 
-  // Prepare chart data
+
   const weeklyData = settings.analyticsHistory || [];
   const productivityScore = Math.round((settings.stats.timeSaved / 60) * 100) / 100;
   const avgBlocksPerDay = (settings.stats.sitesBlocked / 7).toFixed(1);
@@ -659,7 +659,7 @@ const Options = () => {
   );
 };
 
-// --- Deep Cosmos Theme Styles ---
+
 const styles = {
   pageBackground: {
     minHeight: '100vh',
